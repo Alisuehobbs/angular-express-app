@@ -1,0 +1,35 @@
+<div class="container">
+
+<button ng-click="showItemForm = !showItemForm" type="button" class="btn btn-default">ADD A F*ING TASK</button>
+<br>
+
+<form ng-show="showItemForm" name="newItem">
+
+  <div class="form-group" ng-class="{'has-error' : newItem.task.$invalid && !newItem.task.$pristine,'has-success' : newItem.task.$valid }">
+    <label class="control-label" for="task">Task:</label>
+    <input type="text" name="task" class="form-control" ng-model="item.task" ng-minlength="2" ng-maxlength="200" ng-required="true" placeholder="Task">
+    <small ng-show="newItem.task.$error.minlength" class="help-block">Task is too short.</small>
+    <small ng-show="newItem.task.$error.maxlength" class="help-block">Task is too long.</small>
+  </div>
+
+  <div class="form-group" ng-class="{'has-error' : newItem.status.$invalid && !newItem.status.$pristine,'has-success' : newItem.status.$valid }">
+    <label class="control-label" for="status">Status:</label>
+    <input type="text" name="status" class="form-control" ng-model="item.status" ng-minlength="2" ng-maxlength="20" ng-required="true" placeholder="Status">
+    <small ng-show="newItem.status.$error.minlength" class="help-block">Status is too short.</small>
+    <small ng-show="newItem.status.$error.maxlength" class="help-block">Status is too long.</small>
+  </div>
+
+  <button class="btn btn-default" ng-disabled="newItem.$invalid" ng-click="showItemForm=false; submitItem(newItem.$valid)">Submit</button>
+</form>
+
+<div ng-repeat="item in items">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <a href="#/{{item.id}}"> {{item.task}} </a>
+    </div>
+    <div class="panel-footer">{{item.status}}</div>
+  </div>
+
+
+</div>
+</div>
