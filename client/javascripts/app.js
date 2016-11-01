@@ -1,20 +1,21 @@
 var app = angular.module('todoApp', ['ngRoute'])
 
 app.controller('TodoController', function($scope, TodoService) {
-
-    $scope.items = [];
+$scope.view = {}
+    $scope.view.items = [];
 
     TodoService.getList()
         .then(function(items) {
-            $scope.items = items.data
+            $scope.view.items = items.data
         })
 
     $scope.submitItem = function(boolean) {
         if (boolean) {
             const addItem = $scope.item
             TodoService.postItem(addItem)
-                .success(function(object, success) {
-                    $scope.items.push(addItem)
+                .then( function(newItem) {
+                  const newItemData = newItem.data[0]
+                    $scope.view.items.push(newItemData)
                     $scope.item = {}
                     $scope.newItem.$setPristine()
                 })

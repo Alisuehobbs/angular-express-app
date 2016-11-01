@@ -21,7 +21,9 @@ router.get('/:id', function(req, res, next) {
 router.post('/', function(req, res, next) {
     knex('todo')
         .insert(req.body)
+        .returning('*')
         .then(function(item) {
+          console.log(item);
             res.json(item)
         })
 })

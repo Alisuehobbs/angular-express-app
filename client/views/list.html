@@ -1,4 +1,3 @@
-<div class="container">
 
 <button ng-click="showItemForm = !showItemForm" type="button" class="btn btn-default">ADD A F*ING TASK</button>
 <br>
@@ -22,14 +21,11 @@
   <button class="btn btn-default" ng-disabled="newItem.$invalid" ng-click="showItemForm=false; submitItem(newItem.$valid)">Submit</button>
 </form>
 
-<div ng-repeat="item in items">
+<div ng-repeat="item in view.items">
   <div class="panel panel-default">
     <div class="panel-body">
       <a href="#/{{item.id}}"> {{item.task}} </a>
     </div>
     <div class="panel-footer"> Status: {{item.status}}</div>
   </div>
-
-
-</div>
 </div>
