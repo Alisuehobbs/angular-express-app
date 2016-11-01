@@ -20,42 +20,36 @@ app.controller('TodoController', function($scope, TodoService) {
                 })
         }
     }
-
-    $scope.removeItem = function(item) {
-        console.log('item in app.js:', item);
-        const id = item.id
-        TodoService.deleteItem(id)
-            .then(function() {
-                var index = $scope.items.indexOf(item)
-                console.log('index:', index);
-                $scope.items.splice(index, 0)
-            })
-    }
-
-    $scope.editedItem = {}
-
-
-    $scope.submitEditItem = function(item) {
-        if (item) {
-            const editedItem = $scope.editedItem
-            TodoService.putItem(editedItem)
-                .then(function() {
-                    console.log('almost there');
-                    // $scope.items.splice(0, )
-                })
-        }
-    }
-
 })
 
-app.controller('itemController', function($scope, TodoService, $routeParams) {
+app.controller('itemController', function($scope, TodoService, $routeParams, $location) {
 
     const id = $routeParams.id
+
+    $scope.item = {}
 
     TodoService.getOneItem(id)
         .then(function(oneItem) {
             $scope.item = oneItem.data
         })
+
+    $scope.submitEditItem = function(item) {
+        if (item) {
+            const editedItem = $scope.item
+            TodoService.putItem(editedItem)
+            .then( function() {
+              $location.url('/')
+            })
+        }
+    }
+
+    $scope.removeItem = function(item) {
+      const id = item.id
+      TodoService.deleteItem(id)
+      .then(function() {
+        $location.url('/')
+      })
+    }
 
 })
 

@@ -2,31 +2,31 @@
 
 <div class="panel panel-default">
   <div class="panel-body">
-    <a href=""> {{item.task}} </a>
+    {{item.task}}
     <div class="pull-right">
-      <a href="" ng-click="getId(item); showEditForm = !showEditForm">EDIT</a>
+      <a href="" ng-click="showEditForm = !showEditForm">EDIT</a>
       <a href="" ng-click="removeItem(item)">DELETE</a>
     </div>
   </div>
-  <div class="panel-footer">{{item.status}}</div>
+  <div class="panel-footer">Status: {{item.status}}</div>
 </div>
 
 <form ng-show="showEditForm" name="editItem">
 
   <div class="form-group" ng-class="{'has-error' : editItem.task.$invalid && !editItem.task.$pristine,'has-success' : editItem.task.$valid }">
     <label class="control-label" for="task">Task:</label>
-    <input value="{{item.task}}" type="text"  name="task" class="form-control" ng-model="editedItem.task" ng-minlength="2" ng-maxlength="200" ng-required="true" >
+    <input value="{{item.task}}" type="text"  name="task" class="form-control" ng-model="item.task" ng-minlength="2" ng-maxlength="200" ng-required="true" >
     <small ng-show="editItem.task.$error.minlength" class="help-block">Task is too short.</small>
     <small ng-show="editItem.task.$error.maxlength" class="help-block">Task is too long.</small>
   </div>
 
   <div class="form-group" ng-class="{'has-error' : editItem.status.$invalid && !editItem.status.$pristine,'has-success' : editItem.status.$valid }">
     <label class="control-label" for="status">Status:</label>
-    <input placeholder="{{item.status}}" type="text" name="status" class="form-control" ng-model="editedItem.status" ng-minlength="2" ng-maxlength="20" ng-required="true" >
+    <input value="{{item.status}}" type="text" name="status" class="form-control" ng-model="item.status" ng-minlength="2" ng-maxlength="20" ng-required="true" >
     <small ng-show="editItem.status.$error.minlength" class="help-block">Status is too short.</small>
     <small ng-show="editItem.status.$error.maxlength" class="help-block">Status is too long.</small>
   </div>
 
-  <button class="btn btn-default" ng-disabled="editItem.$invalid" ng-click="showItemForm=false; submitEditItem(editItem.$valid)">Submit</button>
+  <button class="btn btn-default" ng-disabled="editItem.$invalid" ng-click="showItemForm=false; submitEditItem(editItem.$valid)">Save Changes</button>
 </form>
 </div>
