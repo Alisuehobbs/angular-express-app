@@ -7,7 +7,6 @@ app.factory('TodoService', function ($http) {
       return $http.post('/api/todo', item)
     },
     deleteItem: function(id) {
-      console.log('id in delete in service:', id);
       return $http.delete(`/api/todo/${id}`)
     },
     getOneItem: function(id) {
